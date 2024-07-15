@@ -69,7 +69,7 @@ def navigate_to_booking_page(driver):
 def try_booking(driver):
     try:
         book_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@href='/Services/Booking/692']/button[@class='button primary']"))
+            EC.element_to_be_clickable((By.XPATH, "//a[@href='/Services/Booking/4996']/button[@class='button primary']"))
         )
         book_button.click()
     except TimeoutException as e:
@@ -102,8 +102,8 @@ def check_and_book(driver):
             print("Clicked on the Book button.")
 
             # If we reach the booking page with available slots
-            # if "/Services/Booking/4996" in driver.current_url:
-            if "/Services/Booking/692" in driver.current_url:    
+            if "/Services/Booking/4996" in driver.current_url:
+            # if "/Services/Booking/692" in driver.current_url:    
                 print("Spot available!")
                 
                 print("Sending Email Notification!")
@@ -112,16 +112,16 @@ def check_and_book(driver):
                     "A visa appointment slot is now available. Please check the consulate website https://prenotami.esteri.it/Services immediately."
                 )
                 
-                print("Sending SMS Notification!")
-                send_sms_notification(
-                    "A visa appointment slot is now available. Please check the consulate website immediately."
-                )
+                # print("Sending SMS Notification!")
+                # send_sms_notification(
+                #     "A visa appointment slot is now available. Please check the consulate website immediately."
+                # )
                 break
             
             # Check for no available spots
             if not handle_no_spot(driver):
-                print("No spots available, retrying in 30 minutes...")
-                time.sleep(60)  # Wait for 30 minutes before retrying
+                print("No spots available, retrying in 10 minutes...")
+                time.sleep(600)  # Wait for 30 minutes before retrying
                 driver.refresh()
                 continue
 
